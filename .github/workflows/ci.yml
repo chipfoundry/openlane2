@@ -64,7 +64,7 @@ jobs:
           volare enable --pdk gf180mcu --pdk-root ./.volare-gf180mcu ${{ steps.set-rev.outputs.opdks_rev }}
       - name: Download IPM
         run: |
-          python3 -m pip install git+https://github.com/efabless/IPM
+          python3 -m pip install git+https://github.com/chipfoundry/IPM
       - name: Checkout submodules
         uses: actions/checkout@v3
         with:
@@ -334,7 +334,7 @@ jobs:
         if: matrix.design.ipm_version != 'None'
         run: |
           export GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          python3 -m pip install git+https://github.com/efabless/IPM
+          python3 -m pip install git+https://github.com/chipfoundry/IPM
           ipm install --ip-root $(realpath $IP_ROOT) --ipm-root ~/.ipm --version ${{ matrix.design.ipm_version }} ${{ matrix.design.name }}
 
       - name: Run Test
@@ -428,7 +428,7 @@ jobs:
         if: ${{ github.event_name == 'push' }} # && env.BRANCH_NAME == 'main' }}
         run: |
           CURRENT_SHA=$(git rev-parse HEAD)
-          REPO=efabless/openlane-metrics
+          REPO=chipfoundry/openlane-metrics
           BRANCH_NAME="commit-$CURRENT_SHA"
           echo "Uploading to 'github.com/$REPO@$BRANCH_NAME'…"
           cd current
